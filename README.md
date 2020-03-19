@@ -1,7 +1,5 @@
 ## Hacbook XPS 7590
 
-> OLED 版 XPS 7590 的亮度调节、睡眠唤醒目前无解，有购买意愿的同学，建议选择 LCD 屏版本。
-
 ### 引导
 
 **OpenCore Version**: [0.5.6](https://github.com/acidanthera/OpenCorePkg/releases)
@@ -35,7 +33,7 @@
 
 ### 已知问题
 
-1. OLED 屏幕亮度调节：亮度调节进度条正常显示、亮度调节快捷键正常，但屏幕亮度不会改变，OLED 原生亮度调节暂时无解，可使用第三方软件 [NightTone](https://apps.apple.com/us/app/nighttone-night-light-filter/id1135472584?mt=12) 降低亮度
+1. OLED 屏幕亮度调节：亮度调节进度条正常显示、亮度调节快捷键正常，但屏幕亮度不会改变，OLED 原生亮度调节暂时无解，可使用第三方软件 [NightTone](https://apps.apple.com/us/app/nighttone-night-light-filter/id1135472584?mt=12) 来调整亮度
 2. 睡眠/唤醒: 可以睡眠，但唤醒时内建屏幕持续黑屏，无法点亮。PS：可能仍是 OLED 屏幕亮度调节问题，其他屏幕版本有待测试
 3. HDMI 热插拔问题：
    * 问题: 开机状态下移除 HDMI 设备时，屏幕无法自动恢复至单显示器模式，且 HDMI 设备的桌面将会丢失；重新插入 HDMI 设备后，HDMI 设备黑屏，只能看到鼠标指针
@@ -239,7 +237,7 @@
 
 - [acidanthera](https://github.com/acidanthera) 提供了 OpenCore 和大量的驱动 ，使得黑苹果可以如此简单
 - [RehabMan](https://github.com/RehabMan) 提供了大量的 SSDT 的补丁和教程
-- [khronokernel](https://github.com/khronokernel) 提供了建明清晰的 [OpenCore Vanilla Guide](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/) 教程
+- [khronokernel](https://github.com/khronokernel) 提供了简明清晰的 [OpenCore Vanilla Guide](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/) 教程
 - [alexandred](https://github.com/alexandred) 提供了媲美原生妙触板的 VoodooI2C 驱动
 - [headkaze](https://github.com/headkaze) 提供了非常有用的黑苹果工具 [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v2-8-6.254559/)
 - [daliansky](https://github.com/daliansky) 提供了大量的SSDT补丁和教程  [OC-little](https://github.com/daliansky/OC-little/)
