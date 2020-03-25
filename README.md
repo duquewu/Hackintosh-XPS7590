@@ -1,245 +1,245 @@
 ## Hacbook XPS 7590
 
-### 引导
+English/[中文](README-CN.md)
+
+### Tested software configuration
 
 **OpenCore Version**: [0.5.6](https://github.com/acidanthera/OpenCorePkg/releases)
 
 **macOS Version**: macOS Catalina 10.15.3(19D76) - 10.15.4(19E266)
 
-### 配置信息
+### Tested hardware configuration
 
-| Key                | Value                                                        |
-| ------------------ | ------------------------------------------------------------ |
-| SKU                | [XPS-7590](https://www.amazon.com/Dell-XPS7590-7572SLV-PUS-i7-9750H-DDR4-2666MHz-GeForce/dp/B07T1DTF4F/ref=sr_1_2?keywords=xps7590&qid=1584450937&sr=8-2) |
-| CPU                | Intel Core i7 9750H                                          |
-| 核心显卡           | Intel Graphics UHD 630                                       |
-| Builtin Screen     | 15.6"  4K OLED 非触屏                                        |
-| RAM                | 海力士 HMA81GS6JJR8N 8G x 2                                  |
-| 内置 SSD - Windows | 东芝 KXG60ZNV256G NVMe 256GB                                 |
-| 外置 SSD - macOS   | 三星 PM961 500Gb + SSK NVME 硬盘盒                           |
-| Audio              | Realtek ALC298                                               |
-| 无线网卡           | 更换为 Dell Wireless DW1560                                  |
-### 工作情况
+| Key                    | Value                                                        |
+| ---------------------- | ------------------------------------------------------------ |
+| SKU                    | [XPS-7590](https://www.amazon.com/Dell-XPS7590-7572SLV-PUS-i7-9750H-DDR4-2666MHz-GeForce/dp/B07T1DTF4F/ref=sr_1_2?keywords=xps7590&qid=1584450937&sr=8-2) |
+| CPU                    | Intel Core i7 9750H                                          |
+| GPU                    | Intel Graphics UHD 630                                       |
+| Builtin Screen         | 15.6"  4K OLED Non-Touch                                     |
+| RAM                    | SK Hynix HMA81GS6JJR8N 8G x 2                                |
+| Internal SSD - Windows | Toshiba KXG60ZNV256G NVMe 256GB                              |
+| External SSD - macOS   | Samsung PM961 500Gb + SSK NVME Enclosure                     |
+| Audio                  | Realtek ALC298                                               |
+| Wireless               | Dell Wireless DW1560 (Replaced)                              |
+### Working
 
-* 核心显卡：工作正常
-* 独立显卡：无解，已屏蔽
-* 无线网卡:  WiFi、蓝牙 工作正常，AirDrop 可用
-* 板载声卡：麦克风、扬声器 工作正常
-* 摄像头：工作正常
-* 输入设备：键盘、触摸板 工作正常
-* 外接显示器：HDMI 冷启动正常，热插拔异常，解决方式见下条
-* USB：端口已定制， 两个 Type-A 端口（最高 5 Gbps）；一个 Type-C 端口（最高 10 Gbps）
-* 指纹：无解，已屏蔽
+* iGPU：working.
+* Wireless Card(**DW1560**):  WiFi&BT working.
+* Audio：spkear & mic working.
+* Camera：working.
+* Input：keyboard & touchpad working.
+* HDMI Port：cold-plug working，hotplug half-working.
+* USB port： Type-A port x 2 (Max 5 Gbps) and Type-C port x 1 (Max 10 Gbps)
 
-### 已知问题
+### Known Problem
 
-1. OLED 屏幕亮度调节：亮度调节进度条正常显示、亮度调节快捷键正常，但屏幕亮度不会改变，OLED 原生亮度调节暂时无解，可使用第三方软件 [NightTone](https://apps.apple.com/us/app/nighttone-night-light-filter/id1135472584?mt=12) 来调整亮度
-2. 睡眠/唤醒: 可以睡眠，但唤醒时内建屏幕持续黑屏，无法点亮。PS：可能仍是 OLED 屏幕亮度调节问题，其他屏幕版本有待测试
-3. HDMI 热插拔问题：
-   * 问题: 开机状态下移除 HDMI 设备时，屏幕无法自动恢复至单显示器模式，且 HDMI 设备的桌面将会丢失；重新插入 HDMI 设备后，HDMI 设备黑屏，只能看到鼠标指针
-   * 解决方式：
-     1. 移除 HDMI 设备前，在 系统偏好设置-显示器-排列 中开启镜像显示器模式，避免 HDMI 设备中的桌面丢失
-     2. 再次插入 HDMI 设备后，在 系统偏好设置-显示器 中切换 HDMI 设备的分辨率，多切换几次即可解决 HDMI 设备的黑屏问题
+1. OLED Brightness Control
 
-### 等待测试
+   * Brightless Slider shown & Brightless shortcut work but OLED brightness never changed
 
-> 目前缺乏以下设备进行测试，如果你使用这个 EFI 对如下设备进行了测试，不妨将结果告知于我
+2. Sleep & Wake
+	 >  Seems like OLED brightness issues. not sure other screen is work or not.
 
-1. 雷电 3 设备：显示器、扩展坞待测试
-2. SD 读卡器
-3. XPS 7590 非 OLED 型号的 亮度调节、睡眠唤醒功能
+   * Sleep is worked , but built-in screen will be black screen when wake.
 
 
-## 项目文件概述
-> 以下是本项目中使用的 efi、kexts、ssdt 以及 config.plist 文件的说明
+3. HDMI hot-plug 
+   * Problem
+     * Can't resume to single monitor mode when remove HDMI monitor, and virtual desktop in external monitor will be loss.
+     * HDMI monitor will be black except mouse indicator
+   * Workaround
+     1. Enable mirror mode in Preferences-Monitor-Arrangement **before** remove HDMI monitor to avoid virtual desktop loss in external monitor.
+     2. Use built-in screen to toggle screen resolution in Preferences-Monitor **after** re-plug HDMI monitor. External screen will light soon.
 
-### EFI 驱动 
+### Waiting Test
 
-> EFI/OC/Drivers 目录
+> If you use these device with my efi, fell free to let me know how it worked.
+
+1. Thunderblot 3
+2. SDCard Reader
+3. XPS 7590 without OLED screen
+
+
+## EFI Description
+> This is my efi folder description
+
+### efi
+
+> EFI/OC/Drivers
 
 * [OpenCorePkg - 0.5.6](https://github.com/acidanthera/OpenCorePkg/releases)
   * FwRuntimeServices.efi
 * [AppleSupportPkg - 2.1.6](https://github.com/acidanthera/AppleSupportPkg)
-  * ApfsDriverLoader.efi: APFS 文件系统驱动
-  * VBoxHfs.efi：HFS 文件系统驱动
+  * ApfsDriverLoader.efi: APFS File System Driver
+  * VBoxHfs.efi：HFS File System Dirver
 
-### ACPI 热补丁
+### ACPI hotpatch
 
-> EFI/OC/ACPI 目录
+> EFI/OC/ACPI
 
-1. **SSDT-EC**： [EC 修复](https://khronokernel.github.io/Getting-Started-With-ACPI/Desktops/desktop-ec.html) 。用于取代 Rename EC0、EVDC to EC 等重命名补丁
+1. **SSDT-EC**： [Fixing EC](https://khronokernel.github.io/Getting-Started-With-ACPI/Desktops/desktop-ec.html) . Use to instead of  `Rename EC0\EVDC to EC` 
 
-2. **SSDT-USBX**： [USB 电源补丁](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)，基于 SSDT-EC。使用后可将 USB 电源输出提高至 2000 毫安（需设备支持），推荐使用
+2. **SSDT-USBX**： [USB Power](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl). USB power output will up to 2000 mA when enable (iPhone or iPad). Base on SSDT-EC.
 
-3. **SSDT-PLUG**： [电源管理修复](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/plug.html)
+3. **SSDT-PLUG**： [Fixing Power Management](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/plug.html)
 
-4. **SSDT-PNLF_BRT6**:：亮度调节 by [xxxzc](https://github.com/xxxzc/xps15-9570-macos)，需配合 Rename BRT6 to BRTX 使用。OLED 屏无效
+4. **SSDT-PNLF_BRT6**:：Bightness control by [xxxzc](https://github.com/xxxzc/xps15-9570-macos)，paired with  `Rename BRT6 to BRTX`.
 
-5. **SSDT-TPDX**:：触控板 GPIO 补丁 by [xxxzc](https://github.com/xxxzc/xps15-9570-macos) 。触控板有两种工作模式，使用此补丁可开启 GPIO 模式
-   1. GPIO 模式：kernel_task 闲时 1\~4% ，忙时 10\~30% 的 CPU 占用
-     
-   2. Polling 模式：kernel_task 常驻 10\~15%  的 CPU 占用
+5. **SSDT-TPDX**:：Touchpad GPIO patch by [xxxzc](https://github.com/xxxzc/xps15-9570-macos).
 
-6. **SSDT-DNVME**: 屏蔽 NVME 设备，仅用于在 macOS 系统中屏蔽 PM981a 等故障 SSD
+6. **SSDT-DNVME**: Block bad NVME SSD，**never** enable this except you put PM981a or other non-compatible SSD in internal nvme slot.
 
-### KEXT 内核扩展
+### KEXTs
 
-> EFI/OC/Kexts 目录
+> EFI/OC/Kexts
 
-1. 驱动平台： [Lilu.kext - 1.4.2](https://github.com/acidanthera/Lilu/releases)
+1. Platform： [Lilu.kext - 1.4.2](https://github.com/acidanthera/Lilu/releases)
 
-   1. 显卡驱动: [WhateverGreen.kext - 1.3.7](https://github.com/acidanthera/WhateverGreen/releases)
+   1. Graphics: [WhateverGreen.kext - 1.3.7](https://github.com/acidanthera/WhateverGreen/releases)
 
-   2. 模拟 SMC: [VirtualSMC.kext - 1.1.1](https://github.com/acidanthera/VirtualSMC)
+   2. SMC: [VirtualSMC.kext - 1.1.1](https://github.com/acidanthera/VirtualSMC)
 
-      * 电池管理：SMCBatteryManager.kext
-      * CPU监控：SMCProcessor.kext
-      * IO   监控：SMCSuperIO.kext
+      * BatteryManager：SMCBatteryManager.kext
+      * CPU Monitor：SMCProcessor.kext
+      * IO   Monitor：SMCSuperIO.kext
 
-   3. 无线驱动：[AirportBrcmFixup.kext - 2.0.6](https://github.com/acidanthera/AirportBrcmFixup)
+   3. WiFi：[AirportBrcmFixup.kext - 2.0.6](https://github.com/acidanthera/AirportBrcmFixup)
 
-   4. 蓝牙驱动：[BrcmPatchRAM - 2.5.1](https://github.com/acidanthera/BrcmPatchRAM)
+   4. Bluetooth：[BrcmPatchRAM - 2.5.1](https://github.com/acidanthera/BrcmPatchRAM)
 
       * BrcmBluetoothInjector.kext
 
       * BrcmFirmwareData.kext
 
       * BrcmPatchRAM3.kext
-2. 声卡驱动：[AppleALC.kext - 1.4.7](https://github.com/acidanthera/AppleALC)
-3. USB驱动：XPS 7590 定制 USBPorts.kext
-4. 键盘驱动：[VoodooPS2 2.1.2](https://github.com/acidanthera/VoodooPS2) 
+2. Audio：[AppleALC.kext - 1.4.7](https://github.com/acidanthera/AppleALC)
+3. USB：Customed USBPorts.kext for XPS 7590
+4. Keyboard：[VoodooPS2 2.1.2](https://github.com/acidanthera/VoodooPS2) 
 
    * VoodooPS2Controller.kext
-5. 触控板驱动：[VoodooI2C - 2.3](https://github.com/alexandred/VoodooI2C/releases)
+5. Touchpad：[VoodooI2C - 2.3](https://github.com/alexandred/VoodooI2C/releases)
 
    * VoodooI2C.kext
    * VoodooI2CHID.kext
-6. 指纹驱动： 无解，使用 NoTouchID.kext 屏蔽
+6. Fingureprint： Not work. Blocking with NoTouchID.kext
 
-### config.plist 描述
+### config.plist
 
-> 仅描述 XPS 7590 使用到的配置项
+> Only describe property in using
 
-#### ACPI 配置项
+#### ACPI
 
-* Add：选择性启用本项目中提供的 SSDT 热补丁，其中 SSDT-EC、SSDT-PLUG 必须开启，其他自选
-* Patch：若要使用启用亮度调节快捷键，则必须开启 Rename BRT6 to BRTX 并在 Add 中启用 SSDT-PNLF_BRT6
+* Add：Enable SSDT hotpatch from this repo.  `SSDT-EC` & `SSDT-PLUG` is required.
+* Patch：Enable brightness control by  `Rename BRT6 to BRTX` paired with  `SSDT-PNLF_BRT6` hotpatch.
 
-##### Booter / Quirks 配置项
+##### Booter / Quirks
 
-* AvoidRuntimeDefrag：修复主板 UEFI
-* EnableSafeModeSlide：安全模式下启用连续性的内存注入方式
-* EnableWriteUnprotector：保证 nvram 能正常写入而不受到 UEFI 内的一些服务的影响
-* ProvideCustomSlide：
+* AvoidRuntimeDefrag
+* EnableSafeModeSlide
+* EnableWriteUnprotector
+* ProvideCustomSlide
 
-* SetupVirtualMap：建立虚拟内存并对物理内存进行映射
+* SetupVirtualMap
 
-##### DeviceProperties / Add 配置项
+##### DeviceProperties / Add
 
-* PciRoot(0x0)/Pci(0x1f,0x3) 声卡注入
+* PciRoot(0x0)/Pci(0x1f,0x3)  Audio Injection
   
   * layout-id：`30`，
-* PciRoot(0x0)/Pci(0x2,0x0) 显卡注入
-  * AAPL,ig-platform-id 设备 ID，UHD 630 <3E9B 0000>
-  * dpcd-max-link-rate：链接速率上限，4K 屏幕使用 <1400 0000> ,其他使用 <1000 0000>
-  * enable-dpcd-max-link-rate-fix：启用 dpcd-max-link-rate
-  * enable-hdmi-dividers-fix：修复 4K HDMI 屏幕异常
-  * enable-hdmi20：启用 HDMI 2.0
-  * enable-lspcon-support：启用 LSP 端口转换
-  * framebuffer-conX-alldata：自定义端口数据，详情查看 [GPU Patching](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/gpu-patches#iGPU-BusID-Patching)
-  * framebuffer-conX-enable：启用自定义数据
-  * framebuffer-conX-has-lspcon：在 conX 上使用 LSP 转换
-  * framebuffer-unifiedmem：核显显存相关
+* PciRoot(0x0)/Pci(0x2,0x0) GPU Injection
+  * AAPL,ig-platform-id:  `<3E9B 0000>`
+  * dpcd-max-link-rate：`<1400 0000>` for 4K ,`<1000 0000>` for other
+  * enable-dpcd-max-link-rate-fix
+  * enable-hdmi-dividers-fix
+  * enable-hdmi20
+  * enable-lspcon-support
+  * framebuffer-conX-alldata：customed framebuffer data, [GPU Patching](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/gpu-patches#iGPU-BusID-Patching)
+  * framebuffer-conX-enable
+  * framebuffer-conX-has-lspcon
+  * framebuffer-unifiedmem
 
-  * framebuffer-portcount：端口数量
+  * framebuffer-portcount
 
-#### Kernal 配置项
+#### Kernal 
 
-* Add ：添加 Kext 驱动，注意点如下
-  1. Lilu.kext 必须在第一个，
-  2. VoodooGPIO.kext、VoodooI2CServices.kext 需要放在 VoodooI2C.kext 之前
-  3. 蓝牙驱动的顺序：
+* Add ：
+  1. Lilu.kext:  **Must be first**
+  2. VoodooGPIO.kext、VoodooI2CServices.kext **before** VoodooI2C.kext 
+  3. Bluetooth Kext Sequence:
      1. BrcmBluetoothInjector.kext
      2. BrcmFirmwareData.kext
      3. BrcmPatchRAM3.kext
-  4. VIrtualSMC 必须放在 SMCxxxx 之前
+  4. VIrtualSMC **before** SMCxxxx 
 * Quirks：
-  * AppleCpuPmCfgLock：未解锁 CFG ，选 `YES`
-  * AppleXcpmCfgLock：未解锁 CFG ，选 `YES`
-  * CustomSMBIOSGuid：Dell 专属，选 `YES`
+  * AppleCpuPmCfgLock：CFG is locking，use  `YES`
+  * AppleXcpmCfgLock： CFG is locking ，use `YES`
+  * CustomSMBIOSGuid：Dell OEM，use `YES`
 
-#### Misc 配置项
+#### Misc
 
 * Boot
-  * HideAuxiliary：在 OC 启动项中隐藏 Recovery 等分区，选 YES
-  * HideSelf：在 OC 启动项中隐藏自身 EFI ，选 YES
-  * ShowPicker：OC 启动过程是否显示系统选择器，选 YES
-  * Timeout：OC 启动项选择器的超时时间，3 秒
+  * HideAuxiliary：hide `Recovery`  in opencore boot picker，use `YES`
+  * HideSelf：hide `EFI`  in opencore boot picker，use `YES`
+  * ShowPicker：show boot picker in opencore ,use `YES`
+  * Timeout：boot picker timeout, use `3` second
 * Security
-  * AllowNvramReset：允许在 OC 启动过程中使用 `Cmd+Opt+P+R` 重置 NVRAM
-  * AllowSetDefault：允许在 OC 启动过程中使用 `Ctrl+Enter` 或 `Ctrl+Index` 设置默认启动项
-  * Vault：是否开启 FileValut，使用`Optional `不开启
-  * ScanPolicy：OC 启动路径扫描策略，使用 `0` 扫描所有设备，其他策略可在 [ScanPolicy](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/security#scanpolicy) 中查看
+  * AllowNvramReset：Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
+  * AllowSetDefault：Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+  * Vault：Disable FileValut，use `Optional `
+  * ScanPolicy：`0` allows you to see all drives available, please refer to [Security]() section for further details. **Will not boot USBs with this set to default**
 
-#### NVRAM 配置项
+#### NVRAM
 
 * Add
-  * `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14` 固定值
-    * UIScale：4K 屏幕使用 `0x02`，4K 以下使用 `0x01`
-  * `7C436110-AB2A-4BBB-A880-FE41995C9F82` 固定值
-    * boot-args：启动参数
-      1. brcmfx-country=#a：解除 WiFI 不同地区的功率限制
-      2. agdpmod=vit9696：屏蔽主版 HDMI 接口检查
-      3. -wegnoegpu：屏蔽独立显卡
-      4. -v：是否在 OC 启动过程中显示日志
-    * csr-active-config：`E7030000` 完全关闭 SIP
-    * prev-lang:kbd：`"en-US:0"`，设置键盘类型为美国
-* Block：屏蔽主板原生 NVRAM 中的参数，从而使得 Add 中自定义的参数生效
-  * `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14` 固定值
+  * `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14` 
+    * UIScale：`02` for HiDPI 
+  * `7C436110-AB2A-4BBB-A880-FE41995C9F82`
+    * boot-args
+      1. brcmfx-country=#a: remove wifi's country limit
+      2. agdpmod=vit9696: block motherboard HDMI chekcing
+      3. -wegnoegpu：block discrete graphics
+      4. -v：enable opencore log in booting
+    * csr-active-config：`E7030000` disable SIP
+    * prev-lang:kbd：`"en-US:0"` for US keyboard layout
+* Block
+  * `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14` 
     * UIScale
-  * `7C436110-AB2A-4BBB-A880-FE41995C9F82` 固定值
+  * `7C436110-AB2A-4BBB-A880-FE41995C9F82` 
     * boot-args
     * csr-active-config
-* WriteFlash：将 NVRAM 写入到闪存中
+* WriteFlash：write NVRAM to flash
 
-#### PlatformInfo 配置项
+#### PlatformInfo
 
-* Automatic：自动填写，`YES`
+* Automatic：`YES`
 * UpdateDataHub：`YES`
 * UpdateNVRAM：`YES`
 * UpdateSMBIOS：`YES`
-* UpdateSMBIOSMode：戴尔设备，使用 `Custom`
-* Generic： 以下信息可使用 Clover 或 Hackintosh 生成
+* UpdateSMBIOSMode：Dell OME，use `Custom`
+* Generic：
   * SystemProductName
   * MLB
   * SystemSerialNumber
   * SystemUUID
 
-#### UEFI 配置项
+#### UEFI
 
-* ConnectDrivers：是否加载 efi 补丁，`YES`
-* Drivers：与 EFI/OC/drivers 中存放的 efi 对应
+* ConnectDrivers：enable efi driver, use`YES`
+* Drivers
 * Input：
-  * KeyForgetThreshold：键盘按键超时阈值，保持默认 `5` ms 
-  * KeyMergeThreshold：键盘按键合并阈值，保持默认 `2` ms 
-  * KeySupport：OC 启动过程中键盘是否可用，保持默认 `YES`
-  * KeySupportMode：保持默认 `Auto`
+  * KeyForgetThreshold： `5` ms 
+  * KeyMergeThreshold： `2` ms 
+  * KeySupport： `YES`
+  * KeySupportMode： `Auto`
 * Output:
-  * ProvideConsoleGop：调用显卡GOP，`YES`
-  * SanitiseClearScreen：修复 4K 屏字体过小的问题，`YES`
+  * ProvideConsoleGop：`YES`
+  * SanitiseClearScreen：`YES` for HiDpi Screen
 * Protocols：
-  * AppleSmcIo：是否使用 OpenCorePkg 内置的 VirtualSMC.efi，`NO`
-    * VirtualSMC.efi 只在开启 FileValut 时需要，此条可直接删除
+  * AppleSmcIo：use OpenCorePkg built-in VirtualSMC.efi，`NO`
 
-> 本项目中的 config 有所裁剪，若想了解具体裁剪信息，可使用 [Sanity check](https://opencore.slowgeek.com/?file=coffeelake056tphZcM&rs=coffeelake056) 进行查看
+> Config.plist in this repo is simplify, use [Sanity check](https://opencore.slowgeek.com/?file=coffeelake056tphZcM&rs=coffeelake056) to see more
 
-## 鸣谢
+## Credit
 
-- [acidanthera](https://github.com/acidanthera) 提供了 OpenCore 和大量的驱动 ，使得黑苹果可以如此简单
-- [RehabMan](https://github.com/RehabMan) 提供了大量的 SSDT 的补丁和教程
-- [khronokernel](https://github.com/khronokernel) 提供了简明清晰的 [OpenCore Vanilla Guide](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/) 教程
-- [alexandred](https://github.com/alexandred) 提供了媲美原生妙触板的 VoodooI2C 驱动
-- [headkaze](https://github.com/headkaze) 提供了非常有用的黑苹果工具 [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v2-8-6.254559/)
-- [daliansky](https://github.com/daliansky) 提供了大量的SSDT补丁和教程  [OC-little](https://github.com/daliansky/OC-little/)
-- [bavariancake](https://github.com/bavariancake/XPS9570-macOS)、 [LuletterSoul](https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave) 、[xxxzc](https://github.com/xxxzc/xps15-9570-macos) 提供了 XPS 9570 的黑苹果配置和教程
-- 感谢以上所有人
+- Thanks [bavariancake](https://github.com/bavariancake/XPS9570-macOS)、 [LuletterSoul](https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave) 、[xxxzc](https://github.com/xxxzc/xps15-9570-macos) for providing  XPS-9570 hackintosh-efi and guide
+
