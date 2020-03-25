@@ -46,7 +46,7 @@ English/[中文](README-CN.md)
 3. HDMI hot-plug 
    * Problem
      * Can't resume to single monitor mode when remove HDMI monitor, and virtual desktop in external monitor will be loss.
-     * HDMI monitor will be black except mouse indicator
+     * HDMI monitor will be black except mouse indicator when re-plug HDMI monitor.
    * Workaround
      1. Enable mirror mode in Preferences-Monitor-Arrangement **before** remove HDMI monitor to avoid virtual desktop loss in external monitor.
      2. Use built-in screen to toggle screen resolution in Preferences-Monitor **after** re-plug HDMI monitor. External screen will light soon.
