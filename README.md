@@ -50,14 +50,14 @@ English/[中文](README-CN.md)
    * Workaround
      1. Enable mirror mode in Preferences-Monitor-Arrangement **before** remove HDMI monitor to avoid virtual desktop loss in external monitor.
      2. Use built-in screen to toggle screen resolution in Preferences-Monitor **after** re-plug HDMI monitor. External screen will light soon.
+4. SDCard Reader not working
 
 ### Waiting Test
 
 > If you use these device with my efi, fell free to let me know how it worked.
 
-1. Thunderblot 3
-2. SDCard Reader
-3. XPS 7590 without OLED screen
+1. Thunderbolt3
+3. Brightness control & Sleep/Wake in non-OLED model of XPS 7590
 
 
 ## EFI Description
