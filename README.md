@@ -30,6 +30,8 @@ English/[中文](README-CN.md)
 * Input：keyboard & touchpad working.
 * HDMI Port：cold-plug working，hotplug half-working.
 * USB port： Type-A port x 2 (Max 5 Gbps) and Type-C port x 1 (Max 10 Gbps)
+* Brightness Controll: wokring on Non-OLED Screen.
+* Sleep/Wake: working on Non-OLED Screen.
 
 ### Known Problem
 
@@ -37,7 +39,7 @@ English/[中文](README-CN.md)
 
    * Brightless Slider shown & Brightless shortcut work but OLED brightness never changed
 
-2. Sleep & Wake
+2. OLED Sleep & Wake
 	 >  Seems like OLED brightness issues. not sure other screen is work or not.
 
    * Sleep is worked , but built-in screen will be black screen when wake.
@@ -51,13 +53,13 @@ English/[中文](README-CN.md)
      1. Enable mirror mode in Preferences-Monitor-Arrangement **before** remove HDMI monitor to avoid virtual desktop loss in external monitor.
      2. Use built-in screen to toggle screen resolution in Preferences-Monitor **after** re-plug HDMI monitor. External screen will light soon.
 4. SDCard Reader not working
+5. Fingerprint not working.
 
 ### Waiting Test
 
-> If you use these device with my efi, fell free to let me know how it worked.
+> If you use these device with my efi, feel free to let me know how it worked.
 
-1. Thunderbolt3
-3. Brightness control & Sleep/Wake in non-OLED model of XPS 7590
+1. USB Type-C with external monitor
 
 
 ## EFI Description
