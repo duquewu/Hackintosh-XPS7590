@@ -1,5 +1,9 @@
 ## Hacbook XPS 7590
 
+> !!! DEPRECATED
+>
+> 因本人的 XPS 7590 已转手给他人，此仓库停止维护。
+
 中文/[English](README.md)
 
 ### 引导

@@ -1,5 +1,9 @@
 ## Hacbook XPS 7590
 
+> !!! DEPRECATED
+>
+> This repo is no longer maintained cause my XPS 7590 was sold to others.
+
 English/[中文](README-CN.md)
 
 ### Tested software configuration
